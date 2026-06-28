@@ -1,22 +1,48 @@
 #include <iostream>
+#include <vector>
 using namespace std;
+
+
+// Check if an array is subset of another array
+
+bool isSubset(vector<int> &x, vector<int> &y){
+
+    int a = x.size(), b = y.size();
+    for (int i=0; i<b; i++){
+        bool found = false;
+
+        for (int j=0; j<a; j++){
+            if (y[i] == x[j]){
+                found = true;
+                x[j] = -1;
+                break;
+            }
+        }
+
+        if (!found) return false;
+    }
+
+    return true;   
+}
+
+void displayVector(vector<int> z){
+    for (int i=0; i<z.size(); i++){
+        cout<<z[i]<<" ";
+    }
+    cout<<endl;
+}
+
 
 int main(){
 
-    int matrix[3][3];
+    vector<int> x = {15, 3, 8, 9, 19, 10};
+    vector<int> y = {3, 9, 10};
 
-    matrix[0][0] = 1; matrix[0][1] = 2; matrix[0][2] = 3;
-    matrix[1][0] = 4; matrix[1][1] = 5; matrix[1][2] = 6;
-    matrix[2][0] = 7; matrix[2][1] = 8; matrix[2][2] = 9;
+    cout<<"x : "; displayVector(x);
+    cout<<"y : "; displayVector(y);
 
-    for (int i=0; i<3; i++){
-        for (int j=0; j<3; j++){
-            cout<<matrix[i][j]<<"\t";
-        }
-        cout<<endl;
-    }
-
-    
+    if (isSubset(x,y)) {cout<<"True"<<endl;}
+    else {cout<<"False"<<endl;}
 
     return 0;
 }
